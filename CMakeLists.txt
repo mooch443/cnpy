@@ -7,7 +7,7 @@ project(CNPY)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-option(ENABLE_STATIC "Build static (.a) library" OFF)
+option(ENABLE_STATIC "Build static (.a) library" ON)
 
 #set(ZLIB_DIR /usr/local/opt/zlib/)
 #if(APPLE)
