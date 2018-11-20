@@ -31,18 +31,13 @@ target_compile_features(cnpy PRIVATE cxx_std_14)
 install(TARGETS "cnpy" LIBRARY DESTINATION lib PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 if(ENABLE_STATIC)
-    add_library(cnpy STATIC "cnpy.cpp")
-    set_target_properties(cnpy PROPERTIES OUTPUT_NAME "cnpy")
-    
-	install(TARGETS "cnpy" ARCHIVE DESTINATION lib)
-else()
-	add_library(cnpy SHARED "cnpy.cpp")
-	set_target_properties(cnpy PROPERTIES POSITION_INDEPENDENT_CODE ON)	
-target_link_libraries(cnpy PUBLIC ZLIB::zlib)#${ZLIB_LIBRARIES})
+    add_library(cnpy-static STATIC "cnpy.cpp")
+    set_target_properties(cnpy-static PROPERTIES OUTPUT_NAME "cnpy")
+    install(TARGETS "cnpy-static" ARCHIVE DESTINATION lib)
 endif(ENABLE_STATIC)
 
 install(FILES "cnpy.h" DESTINATION include)
 install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 add_executable(example1 example1.cpp)
-target_link_libraries(example1 cnpy ZLIB::zlib)
+target_link_libraries(example1 cnpy)
