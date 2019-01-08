@@ -32,9 +32,10 @@ else()
     install(TARGETS "cnpy" LIBRARY DESTINATION lib PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endif(ENABLE_STATIC)
 
-target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR_ZIP})
+message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
+target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
-target_link_libraries(cnpy ${LIBZIP_LIBRARIES})
+target_link_libraries(cnpy ${LIBZIP_LIBRARY})
 target_compile_features(cnpy PRIVATE cxx_std_14)
 
 
