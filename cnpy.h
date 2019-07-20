@@ -14,7 +14,11 @@
 #include<typeinfo>
 #include<iostream>
 #include<cassert>
+#if WIN32
+#include <zip.h>
+#else
 #include<zlib.h>
+#endif
 #include<map>
 #include<memory>
 #include<stdint.h>
