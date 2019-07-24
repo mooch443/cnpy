@@ -20,7 +20,9 @@ endif()
 option(ENABLE_STATIC "Build static (.a) library" ON)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+if(NOT WIN32)
 FIND_PACKAGE(LibZip REQUIRED)
+endif()
 
 if(ENABLE_STATIC)
     add_library(cnpy STATIC "cnpy.cpp")
