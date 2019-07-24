@@ -20,24 +20,21 @@ endif()
 option(ENABLE_STATIC "Build static (.a) library" ON)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
-if(NOT WIN32)
-FIND_PACKAGE(LibZip REQUIRED)
-endif()
 
-if(ENABLE_STATIC)
+#if(ENABLE_STATIC)
     add_library(cnpy STATIC "cnpy.cpp")
     set_target_properties(cnpy PROPERTIES OUTPUT_NAME "cnpy")
     install(TARGETS "cnpy" ARCHIVE DESTINATION lib)
-else()
-    add_library(cnpy SHARED "cnpy.cpp")
+#else()
+#    add_library(cnpy SHARED "cnpy.cpp")
 
-    install(TARGETS "cnpy" LIBRARY DESTINATION lib PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-endif(ENABLE_STATIC)
+#    install(TARGETS "cnpy" LIBRARY DESTINATION lib PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+#endif(ENABLE_STATIC)
 
 message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
-target_link_libraries(cnpy ${LIBZIP_LIBRARY})
+target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY})
 target_compile_features(cnpy PRIVATE cxx_std_14)
 
 
