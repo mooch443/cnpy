@@ -50,5 +50,5 @@ install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_RE
 option(CNPY_EXAMPLES "Build cnpy with examples" OFF)
 if(CNPY_EXAMPLES)
     add_executable(example1 example1.cpp)
-    target_link_libraries(example1 cnpy)
+    target_link_libraries(example1 cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY})
 endif()
