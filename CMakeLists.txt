@@ -35,7 +35,7 @@ message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
-IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+IF(CMAKE_BUILD_TYPE STREQUAL DEBUG)
     message("cnpy using debug zlib library ${ZLIB_LIBRARY_DEBUG}")
     target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY_DEBUG})
 else()
