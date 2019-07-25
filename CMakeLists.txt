@@ -34,7 +34,13 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
-target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY})
+
+IF(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    message("cnpy using debug zlib library ${ZLIB_LIBRARY_DEBUG}")
+    target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY_DEBUG})
+else()
+    target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY})
+endif()
 target_compile_features(cnpy PRIVATE cxx_std_14)
 
 
