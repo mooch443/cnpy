@@ -42,7 +42,7 @@ else()
     target_link_libraries(cnpy ${LIBZIP_LIBRARY} ${ZLIB_LIBRARY})
 endif()
 target_compile_features(cnpy PRIVATE cxx_std_14)
-
+add_dependencies(cnpy libzip zlib)
 
 install(FILES "cnpy.h" DESTINATION include)
 install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
