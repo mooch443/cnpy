@@ -24,7 +24,10 @@
 #include<stdint.h>
 #include<numeric>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
 #include "./zip.hpp"
+#pragma clang diagnostic pop
 
 namespace cnpy {
 
