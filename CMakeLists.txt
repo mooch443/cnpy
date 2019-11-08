@@ -35,12 +35,7 @@ message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
-IF(CMAKE_BUILD_TYPE STREQUAL DEBUG)
-    message("cnpy using debug zlib library $<$<CONFIG:Debug>:zipd>$<$<CONFIG:Release>:zip>")
-    target_link_libraries(cnpy $<$<CONFIG:Debug>:zipd>$<$<CONFIG:Release>:zip>)
-else()
-    target_link_libraries(cnpy $<$<CONFIG:Debug>:zipd>$<$<CONFIG:Release>:zip>)
-endif()
+target_link_libraries(cnpy $<$<CONFIG:Debug>:zipd>$<$<CONFIG:Release>:zip> $<$<CONFIG:Debug>:zd>$<$<CONFIG:Release>:z>)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy libzip zlib)
 
