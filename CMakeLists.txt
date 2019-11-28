@@ -35,7 +35,7 @@ message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
-target_link_libraries(cnpy $<$<CONFIG:Debug>:zipd>$<$<CONFIG:Release>:zip> ${ZLIB_LIBRARY})
+target_link_libraries(cnpy "zip$<IF:$<CONFIG:Debug>,d,>" ${ZLIB_LIBRARY})
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy libzip zlib)
 
