@@ -14,7 +14,7 @@
 #include<typeinfo>
 #include<iostream>
 #include<cassert>
-#if WIN32
+#ifdef WIN32
 #include <zip.h>
 #else
 #include<zlib.h>
