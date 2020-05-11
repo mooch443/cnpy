@@ -37,7 +37,7 @@ target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
 target_link_libraries(cnpy "zip$<IF:$<CONFIG:Debug>,d,>" ${ZLIB_LIBRARY})
 target_compile_features(cnpy PRIVATE cxx_std_14)
-add_dependencies(cnpy libzip zlib)
+add_dependencies(cnpy libzip Z_LIB)
 
 install(FILES "cnpy.h" DESTINATION include)
 install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
