@@ -35,7 +35,7 @@ message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
-target_link_libraries(cnpy libzip zlib)
+target_link_libraries(cnpy libzip Z_LIB)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy libzip Z_LIB)
 
@@ -45,5 +45,5 @@ install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_RE
 option(CNPY_EXAMPLES "Build cnpy with examples" OFF)
 if(CNPY_EXAMPLES)
     add_executable(example1 example1.cpp)
-    target_link_libraries(example1 cnpy libzip zlib)
+    target_link_libraries(example1 cnpy libzip Z_LIB)
 endif()
