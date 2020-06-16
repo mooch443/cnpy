@@ -39,8 +39,8 @@ target_link_libraries(cnpy libzip Z_LIB)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy libzip Z_LIB)
 
-install(FILES "cnpy.h" DESTINATION include)
-install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+#install(FILES "cnpy.h" DESTINATION include)
+#install(FILES "mat2npz" "npy2mat" "npz2mat" DESTINATION bin PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 option(CNPY_EXAMPLES "Build cnpy with examples" OFF)
 if(CNPY_EXAMPLES)
