@@ -35,6 +35,6 @@ message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
 target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
 target_include_directories(cnpy PUBLIC "extern/libzippp/")
 
-target_link_libraries(cnpy TRex::LibZIP TRex::LibZ)
+target_link_libraries(cnpy PRIVATE TRex::LibZIP TRex::LibZ)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy TRex::LibZIP TRex::LibZ)
