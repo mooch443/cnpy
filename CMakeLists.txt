@@ -38,3 +38,14 @@ target_include_directories(cnpy PUBLIC "extern/libzippp/")
 target_link_libraries(cnpy PRIVATE Commons::LibZIP Commons::LibZ)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy Commons::LibZIP Commons::LibZ)
+
+
+target_include_directories(cnpy INTERFACE
+  "$<BUILD_INTERFACE:${LIBZIP_INCLUDE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp>"
+  "$<INSTALL_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
+)
+set_target_properties(cnpy PROPERTIES
+  IMPORTED_LOCATION cnpy
+  INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${LIBZIP_INCLUDE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp"
+  INTERFACE_LINK_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR}"
+)
