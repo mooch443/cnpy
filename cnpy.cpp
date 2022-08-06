@@ -62,8 +62,8 @@ template<> std::vector<char>& cnpy::operator+=(std::vector<char>& lhs, const cha
 void cnpy::parse_npy_header(std::string &buffer, size_t &word_size,
                             std::vector<size_t> &shape, bool &fortran_order) {
     assert(buffer.substr(0, 6) == "\x93NUMPY");
-    uint8_t major_version = *reinterpret_cast<uint8_t *>(buffer.data() + 6);
-    uint8_t minor_version = *reinterpret_cast<uint8_t *>(buffer.data() + 7);
+    //uint8_t major_version = *reinterpret_cast<uint8_t *>(buffer.data() + 6);
+    //uint8_t minor_version = *reinterpret_cast<uint8_t *>(buffer.data() + 7);
     uint16_t header_len =
       (*reinterpret_cast<uint8_t *>(buffer.data() + 8)) |
       ((*reinterpret_cast<uint8_t *>(buffer.data() + 9)) << 8);
