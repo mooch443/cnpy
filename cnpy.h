@@ -169,7 +169,7 @@ namespace cnpy {
 
       // Create source buffer functor - memory will be freed automatically
       libzip::source source =
-          [ ptr, nbytes ](struct zip * archive) -> struct zip_source * {
+          [ ptr, nbytes ](struct zip_t * archive) -> struct zip_source * {
         auto src = zip_source_buffer(archive, ptr, nbytes, 1);
         if (src == nullptr) {
           std::free(ptr);
