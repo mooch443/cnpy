@@ -24,7 +24,18 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 #if(ENABLE_STATIC)
     add_library(cnpy STATIC "cnpy.cpp")
     set_target_properties(cnpy PROPERTIES OUTPUT_NAME "cnpy")
-    install(TARGETS "cnpy" ARCHIVE DESTINATION lib)
+    install(TARGETS "cnpy"
+        EXPORT commonsTargets
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include
+    )
+    install(FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/cnpy.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp/zip.hpp"
+        DESTINATION include/cnpy
+    )
 #else()
 #    add_library(cnpy SHARED "cnpy.cpp")
 
@@ -32,20 +43,13 @@ SET(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 #endif(ENABLE_STATIC)
 
 message(STATUS "lip ${LIBZIP_INCLUDE_DIR} ${LIBZIP_LIBRARY}")
-target_include_directories(cnpy PUBLIC ${LIBZIP_INCLUDE_DIR})
-target_include_directories(cnpy PUBLIC "extern/libzippp/")
+target_include_directories(cnpy PUBLIC
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+  "$<BUILD_INTERFACE:${LIBZIP_INCLUDE_DIR}>"
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp>"
+  "$<INSTALL_INTERFACE:include>"
+)
 
 target_link_libraries(cnpy PRIVATE Commons::LibZIP Commons::LibZ)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy Commons::LibZIP Commons::LibZ)
-
-
-target_include_directories(cnpy INTERFACE
-  "$<BUILD_INTERFACE:${LIBZIP_INCLUDE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp>"
-  "$<INSTALL_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
-)
-set_target_properties(cnpy PROPERTIES
-  IMPORTED_LOCATION cnpy
-  INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR};${LIBZIP_INCLUDE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp"
-  INTERFACE_LINK_DIRECTORIES "${CMAKE_CURRENT_BINARY_DIR}"
-)
