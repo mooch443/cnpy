@@ -50,6 +50,6 @@ target_include_directories(cnpy PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-target_link_libraries(cnpy PRIVATE Commons::LibZIP Commons::LibZ)
+target_link_libraries(cnpy PUBLIC Commons::LibZIP Commons::LibZ)
 target_compile_features(cnpy PRIVATE cxx_std_14)
 add_dependencies(cnpy Commons::LibZIP Commons::LibZ)
