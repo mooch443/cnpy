@@ -1,20 +1,12 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 project(CNPY)
 
-# Update submodules as needed
-find_package(Git QUIET)
-if(GIT_FOUND)
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if(GIT_SUBMODULE)
-        message(STATUS "Submodule update")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init
-                        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                        RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif()
-    endif()
+set(LIBZIPPP_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/extern/libzippp/zip.hpp")
+if(NOT EXISTS "${LIBZIPPP_HEADER}")
+    message(FATAL_ERROR
+        "Missing cnpy dependency: ${LIBZIPPP_HEADER}. "
+        "Initialize repository submodules before configuring the build.")
 endif()
 
 option(ENABLE_STATIC "Build static (.a) library" ON)
